@@ -1,0 +1,93 @@
+package cognoRiseInfotech;
+import java.util.ArrayList;
+
+class Book {
+    private String title;
+    private String author;
+    private boolean isCheckedOut;
+
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+        this.isCheckedOut = false;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public boolean isCheckedOut() {
+        return isCheckedOut;
+    }
+
+    public void setCheckedOut(boolean checkedOut) {
+        isCheckedOut = checkedOut;
+    }
+
+    @Override
+    public String toString() {
+        return "Title: " + title + ", Author: " + author + ", Status: " + (isCheckedOut ? "Checked Out" : "Available");
+    }
+}
+
+class LibraryCatalog {
+    private ArrayList<Book> books;
+
+    public LibraryCatalog() {
+        books = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    public ArrayList<Book> searchByTitle(String title) {
+        ArrayList<Book> foundBooks = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                foundBooks.add(book);
+            }
+        }
+        return foundBooks;
+    }
+
+    public ArrayList<Book> searchByAuthor(String author) {
+        ArrayList<Book> foundBooks = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getAuthor().equalsIgnoreCase(author)) {
+                foundBooks.add(book);
+            }
+        }
+        return foundBooks;
+    }
+
+    public void checkOutBook(Book book) {
+        if (!book.isCheckedOut()) {
+            book.setCheckedOut(true);
+            System.out.println("You have checked out the book: " + book.getTitle());
+        } else {
+            System.out.println("Sorry, the book is already checked out.");
+        }
+    }
+
+    public void returnBook(Book book) {
+        if (book.isCheckedOut()) {
+            book.setCheckedOut(false);
+            System.out.println("Thank you for returning the book: " + book.getTitle());
+        } else {
+            System.out.println("This book is not checked out.");
+        }
+    }
+
+    public void displayAllBooks() {
+        System.out.println("All Books in the Library:");
+        for (Book book : books) {
+            System.out.println(book);
+        }
+    }
+}
+
